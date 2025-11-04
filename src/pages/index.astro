@@ -4,6 +4,9 @@ const title = "Feliz Cumpleaños Al";
 
 <html lang="es">
   <head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
@@ -100,7 +103,7 @@ const title = "Feliz Cumpleaños Al";
       }
 
       body {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-family: 'Noto Sans', 'Roboto Condensed', 'Helvetica Neue', Arial, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         display: flex;
@@ -174,17 +177,21 @@ const title = "Feliz Cumpleaños Al";
         justify-content: center;
         gap: 40px;
         animation: fadeIn 1s ease-in;
+        width: 100%;
+        max-width: 560px; /* evita que ocupe toda la anchura en pantallas medianas */
+        margin: 0 auto;   /* centra el wrapper */
+        padding: 0 16px;  /* pequeño margen lateral en pantallas estrechas */
       }
-
+      
       .gift-wrapper.opening {
         animation: fadeOut 0.8s ease-out forwards;
       }
-
+      
       @keyframes fadeIn {
         from { opacity: 0; transform: scale(0.8); }
         to { opacity: 1; transform: scale(1); }
       }
-
+      
       @keyframes fadeOut {
         to { opacity: 0; transform: scale(1.2); }
       }
@@ -497,6 +504,12 @@ const title = "Feliz Cumpleaños Al";
         body {
           padding: 15px;
         }
+        
+        /* Limitar aún más el ancho del contenedor en tablet y móviles */
+        .gift-wrapper {
+          max-width: 420px;
+          padding: 0 12px;
+        }
 
         .instruction p {
           font-size: 1rem;
@@ -552,6 +565,12 @@ const title = "Feliz Cumpleaños Al";
       }
 
       @media (max-width: 480px) {
+        /* no dejar que el wrapper ocupe toda la anchura en móviles pequeños */
+        .gift-wrapper {
+          max-width: 320px;
+          padding: 0 10px;
+        }
+
         .gift-body {
           width: 180px;
           height: 180px;
