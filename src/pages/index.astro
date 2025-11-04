@@ -1,16 +1,619 @@
 ---
-
+const title = "Feliz Cumpleaños Mi Amor";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="stars"></div>
+    
+    <div id="giftWrapper" class="gift-wrapper">
+      <div class="glow-orb glow-orb-1"></div>
+      <div class="glow-orb glow-orb-2"></div>
+      
+      <div class="instruction">
+        <p>🎁 Toca el regalo para abrirlo 🎁</p>
+      </div>
+      
+      <div id="giftBox" class="gift-box">
+        <div class="gift-lid">
+          <div class="bow">
+            <div class="bow-left"></div>
+            <div class="bow-right"></div>
+            <div class="bow-center"></div>
+          </div>
+        </div>
+        <div class="gift-body">
+          <div class="ribbon ribbon-vertical"></div>
+          <div class="ribbon ribbon-horizontal"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="letterContainer" class="letter-container hidden">
+      <button id="closeBtn" class="close-btn">✕</button>
+      
+      <header class="header">
+        <h1 class="title">
+          <span class="title-word">Feliz</span>
+          <span class="title-word">Cumpleaños</span>
+        </h1>
+        <p class="subtitle">Para la persona más especial ✨</p>
+      </header>
+
+      <div class="card">
+        <div class="card-inner">
+          <div class="letter-header">
+            <span class="date">{new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          </div>
+          
+          <div class="letter-content">
+            <p>Mi amor,</p>
+            
+            <p>Hoy celebro no solo el día en que llegaste al mundo, sino cada momento que hemos compartido juntos. Eres la razón por la que mis días tienen color y mis noches tienen sentido.</p>
+            
+            <p>Gracias por ser mi compañera, mi confidente, mi mejor amiga. Gracias por cada sonrisa, cada abrazo, cada "te quiero" susurrado al oído.</p>
+            
+            <p>Que este nuevo año te traiga todo lo que mereces: felicidad infinita, sueños cumplidos y todo el amor del universo. Estaré a tu lado en cada paso del camino.</p>
+            
+            <p>Te amo más de lo que las palabras pueden expresar.</p>
+            
+            <div class="signature">
+              <p>Con todo mi amor,</p>
+              <p class="sign-name">[Tu nombre]</p>
+            </div>
+          </div>
+
+          <div class="floating-hearts">
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      :root {
+        --primary: #667eea;
+        --secondary: #764ba2;
+        --accent: #f093fb;
+        --light: #fad0c4;
+        --dark: #1a1a2e;
+        --text: #2d3748;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background-image: 
+          radial-gradient(2px 2px at 20% 30%, white, transparent),
+          radial-gradient(2px 2px at 60% 70%, white, transparent),
+          radial-gradient(1px 1px at 50% 50%, white, transparent),
+          radial-gradient(1px 1px at 80% 10%, white, transparent),
+          radial-gradient(2px 2px at 90% 60%, white, transparent),
+          radial-gradient(1px 1px at 33% 80%, white, transparent);
+        background-size: 200% 200%;
+        animation: twinkle 8s ease-in-out infinite;
+        opacity: 0.6;
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+
+      .glow-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.3;
+        animation: float 6s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .glow-orb-1 {
+        width: 300px;
+        height: 300px;
+        background: #fad0c4;
+        top: 10%;
+        right: 10%;
+      }
+
+      .glow-orb-2 {
+        width: 250px;
+        height: 250px;
+        background: #a8edea;
+        bottom: 10%;
+        left: 10%;
+        animation-delay: 3s;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+
+      /* Gift Wrapper Styles */
+      .gift-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        animation: fadeIn 1s ease-in;
+      }
+
+      .gift-wrapper.opening {
+        animation: fadeOut 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes fadeOut {
+        to { opacity: 0; transform: scale(1.2); }
+      }
+
+      .instruction {
+        text-align: center;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.8; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+      }
+
+      .gift-box {
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .gift-box:hover {
+        transform: scale(1.05);
+      }
+
+      .gift-box.shake {
+        animation: shake 0.5s ease-in-out;
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-5deg); }
+        75% { transform: rotate(5deg); }
+      }
+
+      .gift-body {
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+        border-radius: 10px;
+        position: relative;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .gift-lid {
+        width: 270px;
+        height: 80px;
+        background: linear-gradient(135deg, #ff8fb3 0%, #d65d7d 100%);
+        border-radius: 10px 10px 0 0;
+        position: absolute;
+        top: -70px;
+        left: -10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.6s ease;
+        transform-origin: bottom;
+      }
+
+      .gift-box.opening .gift-lid {
+        transform: rotateX(-110deg) translateY(-30px);
+      }
+
+      .ribbon {
+        position: absolute;
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .ribbon-vertical {
+        width: 40px;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .ribbon-horizontal {
+        width: 100%;
+        height: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .bow {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .bow-left, .bow-right {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        border-radius: 50% 50% 0 50%;
+        position: absolute;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .bow-left {
+        transform: rotate(45deg);
+        left: -35px;
+      }
+
+      .bow-right {
+        transform: rotate(-45deg);
+        right: -35px;
+      }
+
+      .bow-center {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        border-radius: 50%;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Letter Container Styles */
+      .letter-container {
+        max-width: 900px;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        animation: slideIn 0.8s ease-out;
+      }
+
+      .letter-container.hidden {
+        display: none;
+      }
+
+      @keyframes slideIn {
+        from { 
+          opacity: 0; 
+          transform: translateY(50px) scale(0.9); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateY(0) scale(1); 
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .title-word {
+        display: inline-block;
+        background: linear-gradient(45deg, #fff, #fad0c4, #fff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease infinite;
+        text-shadow: 0 0 30px rgba(250, 208, 196, 0.5);
+      }
+
+      @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .subtitle {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+        opacity: 0.9;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 
+          0 20px 60px rgba(0, 0, 0, 0.3),
+          0 0 100px rgba(250, 208, 196, 0.2);
+        position: relative;
+      }
+
+      .card-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .letter-header {
+        text-align: right;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      .date {
+        color: #718096;
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+
+      .letter-content {
+        color: var(--text);
+        line-height: 1.8;
+        font-size: 1rem;
+      }
+
+      .letter-content p {
+        margin-bottom: 18px;
+        text-align: justify;
+      }
+
+      .signature {
+        margin-top: 35px;
+        text-align: right;
+        font-style: italic;
+      }
+
+      .sign-name {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .floating-hearts {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 20px;
+      }
+
+      .heart {
+        position: absolute;
+        color: #f093fb;
+        font-size: 20px;
+        opacity: 0;
+        animation: float-up 8s ease-in infinite;
+      }
+
+      .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+      .heart:nth-child(2) { left: 30%; animation-delay: 2s; }
+      .heart:nth-child(3) { left: 50%; animation-delay: 4s; }
+      .heart:nth-child(4) { left: 70%; animation-delay: 6s; }
+      .heart:nth-child(5) { left: 90%; animation-delay: 8s; }
+
+      @keyframes float-up {
+        0% {
+          bottom: -30px;
+          opacity: 0;
+          transform: translateX(0);
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.6;
+        }
+        100% {
+          bottom: 100%;
+          opacity: 0;
+          transform: translateX(30px);
+        }
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        body {
+          padding: 15px;
+        }
+
+        .instruction p {
+          font-size: 1rem;
+        }
+
+        .gift-body {
+          width: 200px;
+          height: 200px;
+        }
+
+        .gift-lid {
+          width: 220px;
+          height: 70px;
+        }
+
+        .title {
+          font-size: 2.2rem;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+          letter-spacing: 1px;
+        }
+        
+        .card {
+          padding: 25px 20px;
+          border-radius: 15px;
+        }
+        
+        .letter-content {
+          font-size: 0.95rem;
+          line-height: 1.7;
+        }
+
+        .letter-content p {
+          margin-bottom: 15px;
+        }
+
+        .signature {
+          margin-top: 25px;
+        }
+
+        .sign-name {
+          font-size: 1.1rem;
+        }
+
+        .close-btn {
+          top: -45px;
+          width: 35px;
+          height: 35px;
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .gift-body {
+          width: 180px;
+          height: 180px;
+        }
+
+        .gift-lid {
+          width: 200px;
+          height: 60px;
+          top: -55px;
+        }
+
+        .ribbon-vertical {
+          width: 35px;
+        }
+
+        .ribbon-horizontal {
+          height: 35px;
+        }
+
+        .bow-left, .bow-right {
+          width: 40px;
+          height: 40px;
+        }
+
+        .bow-center {
+          width: 25px;
+          height: 25px;
+        }
+
+        .title {
+          font-size: 1.8rem;
+        }
+
+        .card {
+          padding: 20px 15px;
+        }
+
+        .letter-content {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+
+    <script>
+      const giftBox = document.getElementById('giftBox');
+      const giftWrapper = document.getElementById('giftWrapper');
+      const letterContainer = document.getElementById('letterContainer');
+      const closeBtn = document.getElementById('closeBtn');
+
+      giftBox.addEventListener('click', () => {
+        giftBox.classList.add('opening', 'shake');
+        
+        setTimeout(() => {
+          giftWrapper.classList.add('opening');
+        }, 600);
+
+        setTimeout(() => {
+          giftWrapper.style.display = 'none';
+          letterContainer.classList.remove('hidden');
+        }, 1400);
+      });
+
+      closeBtn.addEventListener('click', () => {
+        letterContainer.classList.add('hidden');
+        giftWrapper.style.display = 'flex';
+        giftWrapper.classList.remove('opening');
+        giftBox.classList.remove('opening', 'shake');
+      });
+    </script>
+  </body>
 </html>
