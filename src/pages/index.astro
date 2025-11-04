@@ -589,15 +589,19 @@ const title = "Feliz Cumpleaños Mi Amor";
       }
     </style>
 
-    <script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
       const giftBox = document.getElementById('giftBox');
       const giftWrapper = document.getElementById('giftWrapper');
       const letterContainer = document.getElementById('letterContainer');
       const closeBtn = document.getElementById('closeBtn');
 
+      // Si falta algún elemento, no hacemos nada
+      if (!giftBox || !giftWrapper || !letterContainer || !closeBtn) return;
+
       giftBox.addEventListener('click', () => {
         giftBox.classList.add('opening', 'shake');
-        
+
         setTimeout(() => {
           giftWrapper.classList.add('opening');
         }, 600);
@@ -614,6 +618,7 @@ const title = "Feliz Cumpleaños Mi Amor";
         giftWrapper.classList.remove('opening');
         giftBox.classList.remove('opening', 'shake');
       });
-    </script>
+    });
+  </script>
   </body>
 </html>
